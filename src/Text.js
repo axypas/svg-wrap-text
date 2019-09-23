@@ -83,6 +83,7 @@ class Text extends Component {
       lineHeight,
       capHeight,
       innerRef,
+      width,
       ...textProps
     } = this.props;
     const { wordsByLines } = this.state;
@@ -121,21 +122,13 @@ class Text extends Component {
     }
 
     return (
-      <svg
-        ref={innerRef}
-        x={dx}
-        y={dy}
-        fontSize={textProps.fontSize}
-        style={{ overflow: 'visible' }}
-      >
-        <text {...textProps} textAnchor={textAnchor}>
-          {wordsByLines.map((line, index) => (
-            <tspan x={x} dy={index === 0 ? startDy : lineHeight} key={index}>
-              {line.words.join(' ')}
-            </tspan>
-          ))}
-        </text>
-      </svg>
+      <text {...textProps} textAnchor={textAnchor}>
+        {wordsByLines.map((line, index) => (
+          <tspan x={x} dy={index === 0 ? startDy : lineHeight} key={index}>
+            {line.words.join(' ')}
+          </tspan>
+        ))}
+      </text>
     );
   }
 }
